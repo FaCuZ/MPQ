@@ -1,33 +1,84 @@
 <template>
 	<section class="section">
-		<div class="columns is-mobile">
-			<card	title="Free" icon="github">
-				Open source on <a href="https://github.com/buefy/buefy">GitHub</a>
-			</card>
-
-			<card title="Responsive" icon="cellphone-link">
-				<b class="has-text-grey">Every</b> component is responsive
-			</card>
-
-			<card title="Modern" icon="alert-decagram">
-				Built with <a href="https://vuejs.org/">Vue.js</a> and <a href="http://bulma.io/"> Bulma</a>
-			</card>
-
-			<card title="Lightweight" icon="arrange-bring-to-front">
-				No other internal dependency
-			</card>
+		<div class="logo">
+			<img src="~assets/logo.png" alt="MPQ" height="280" class="logo-img">
+			Fast and detailed npm packages analyzer
 		</div>
+		<b-field>
+			<b-autocomplete class="search-index" clearable placeholder="Select a package" icon="magnify"
+				v-model="name"
+				:data="filteredDataArray"
+				@select="option => openPackage(option)">
+
+				<template slot="empty">No results found</template>
+			</b-autocomplete>
+		</b-field>
 	</section>
 </template>
 
 <script>
-import Card from '~/components/Card'
-
 export default {
-	name: 'HomePage',
-
-	components: {
-		Card
+		data() {
+			return {
+				data: [
+					'axios',
+					'express',
+					'zabbix-rpc',
+					'zabbix',
+					'Ember',
+					'jQuery',
+					'Meteor',
+					'Polymer',
+					'React',
+					'RxJS'
+				],
+				name: '',
+				selected: null
+			}
+		},
+		computed: {
+			filteredDataArray() {
+				return this.data.filter((option) => {
+					return option
+						.toString()
+						.toLowerCase()
+						.indexOf(this.name.toLowerCase()) >= 0
+				})
+			}
+		},
+		methods: {
+			openPackage(option) {
+				this.$router.push('/package/' + option.toLowerCase())
+			}
+		},
+		transition: {
+			name: 'index',
+			mode: 'out-in',
+			duration: 500
+		}
 	}
-}
 </script>
+
+<style scoped>
+.logo-img{
+	height: 105px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
+	margin-bottom: 5px;
+}
+
+.logo{
+	text-align: center;
+	margin-bottom: 30px;
+	font-size: 20px;
+}
+
+.search-index{
+	width: 600px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+</style>
