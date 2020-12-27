@@ -48,3 +48,10 @@ export default {
 }
 </script>
 
+
+<style scoped>
+.bb text{
+	font-size: 16px !important;
+}
+</style>
+

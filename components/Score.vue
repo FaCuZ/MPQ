@@ -4,7 +4,6 @@
 
 <script>
 import bb, { donut } from "billboard.js";
-//import "~/assets/Insight.css";
 
 export default {
 	props: {

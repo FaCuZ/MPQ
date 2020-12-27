@@ -1,12 +1,13 @@
 <template>
 	<section class="section">
 		<div class="logo">
-			<img src="~assets/logo.png" alt="MPQ" height="280" class="logo-img">
+			<img src="~assets/img/logo.png" alt="MPQ" height="280" class="logo-img">
 			Fast and detailed npm packages analyzer
 		</div>
 		<b-field>
 			<b-autocomplete class="search-index" clearable placeholder="Select a package" icon="magnify"
 				v-model="name"
+				keep-first
 				:data="filteredDataArray"
 				@select="option => openPackage(option)">
 
@@ -51,11 +52,6 @@ export default {
 				this.$router.push('/package/' + option.toLowerCase())
 			}
 		},
-		transition: {
-			name: 'index',
-			mode: 'out-in',
-			duration: 500
-		}
 	}
 </script>
 

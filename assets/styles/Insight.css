@@ -33,7 +33,7 @@
 	-ms-user-select: none;
 	user-select: none;
 	fill: #555;
-	font-size: 11px;
+	font-size: 16px;
   }
 
   .bb-legend-item-title,
@@ -190,7 +190,7 @@
 	border: 1px solid #999;
 	background-color: #fff;
 	text-align: left;
-	font-size: 11px;
+	font-size: 16px;
   }
   .bb-tooltip th {
 	font-size: 12px;
@@ -231,7 +231,7 @@
   }
   .bb-tooltip .bb-tooltip-detail .bb-tooltip-name,
   .bb-tooltip .bb-tooltip-detail .bb-tooltip-value {
-	font-size: 11px;
+	font-size: 16px;
 	line-height: 13px;
 	padding: 4px 0 3px;
 	color: #444;
