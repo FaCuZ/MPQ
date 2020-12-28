@@ -21,7 +21,6 @@ export default {
 		},
 	},
 	async mounted() {
-		console.log("#"+this.name)
 		bb.generate({
 			components: true,
 			data: {

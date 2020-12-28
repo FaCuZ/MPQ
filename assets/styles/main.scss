@@ -39,3 +39,15 @@ a {
 .field-label {
 	min-width: 100px;
 }
+
+a.dropdown-item, .dropdown .dropdown-menu .has-link a, button.dropdown-item {
+    padding-right: 1rem !important;
+}
+
+.dropdown-content {
+    /* background-color: #f9f9f9; */
+    /* border-radius: 4px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02); */
+    padding-bottom: 0rem !important;
+    padding-top: 0rem !important;
+}
