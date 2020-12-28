@@ -45,51 +45,52 @@
 import debounce from 'lodash/debounce'
 
 export default {
-		data() {
-			return {
-				data: [],
-				name: '',
-				selected: null,
-				isFetching: false
+  	layout: 'home',
+	data() {
+		return {
+			data: [],
+			name: '',
+			selected: null,
+			isFetching: false
 
 
-			}
+		}
+	},
+	computed: {
+		filteredDataArray() {
+			return this.data.filter((option) => {
+				return option
+					.toString()
+					.toLowerCase()
+					.indexOf(this.name.toLowerCase()) >= 0
+			})
+		}
+	},
+	methods: {
+		openPackage(option) {
+			if(option) this.$router.push('/package/' + option.package.name.toLowerCase())
+			this.data = []
 		},
-		computed: {
-			filteredDataArray() {
-				return this.data.filter((option) => {
-					return option
-						.toString()
-						.toLowerCase()
-						.indexOf(this.name.toLowerCase()) >= 0
-				})
-			}
-		},
-		methods: {
-			openPackage(option) {
-				if(option) this.$router.push('/package/' + option.package.name.toLowerCase())
+		getAsyncData: debounce(async function (name) {
+			if (!name.length) {
 				this.data = []
-			},
-			getAsyncData: debounce(async function (name) {
-				if (!name.length) {
-					this.data = []
-					return
-				}
-				this.isFetching = true
+				return
+			}
+			this.isFetching = true
 
-				const json = await fetch(`https://api.npms.io/v2/search?q=${name}+not:deprecated&size=15`)
-										.then(res => res.json())
-										.catch((error) => {
-											this.data = []
-											throw error
-										})
+			const json = await fetch(`https://api.npms.io/v2/search?q=${name}+not:deprecated&size=15`)
+									.then(res => res.json())
+									.catch((error) => {
+										this.data = []
+										throw error
+									})
 
-				this.data = []
-				json.results.forEach((item) => this.data.push(item))
-				this.isFetching = false
-			}, 500)
-		},
-	}
+			this.data = []
+			json.results.forEach((item) => this.data.push(item))
+			this.isFetching = false
+		}, 500)
+	},
+}
 </script>
 
 <style scoped>

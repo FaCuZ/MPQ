@@ -86,15 +86,16 @@
 				</div>
 			</div>
 		</div>
-
-
-		<br/><br/><NuxtLink to="/">Home page</NuxtLink>
 	</section>
 </template>
 
 
 <script>
+	import Sidebar from '~/components/Sidebar.vue'
+
 	export default {
+		layout: 'score',
+		components: { Sidebar },
 		scrollToTop: true,
 		data() {
 			return {
