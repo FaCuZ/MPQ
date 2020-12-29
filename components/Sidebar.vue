@@ -1,12 +1,13 @@
 <template>
 		<b-sidebar
-		position="fixed"
-		fullheight
-		mobile="hide"
-		reduce="true"
-		type="is-dark"
-		open
-	>
+			position="fixed"
+			fullheight
+			mobile="hide"
+			reduce
+			type="is-dark"
+			:can-cancel=canCancel
+			open
+		>
 		<div class="p-1">
 			<div class="block img-logo">
 				<NuxtLink to="/">
@@ -16,15 +17,55 @@
 
 			<b-menu class="is-custom-mobile">
 				<b-menu-list>
-					<b-menu-item icon="account-box"></b-menu-item>
-					<b-menu-item icon="home-account"></b-menu-item>
-					<b-menu-item icon="link"></b-menu-item>
+					<b-menu-item icon="chart-pie" active></b-menu-item>
+					<b-menu-item icon="text-box-outline"></b-menu-item>
+        			<!-- <b-tooltip label="Dashboard" position="is-right"> -->
+						<b-menu-item icon="magnify"></b-menu-item>
+        			<!-- </b-tooltip> -->
+					<b-menu-item icon="export-variant"></b-menu-item>
+				</b-menu-list>
+
+			</b-menu>
+			<b-menu class="is-custom-mobile menu-bottom">
+				<b-menu-list>
+					<b-menu-item icon="white-balance-sunny"
+						@click="$colorMode.preference = nextColorMode()"
+					></b-menu-item>
 				</b-menu-list>
 			</b-menu>
 		</div>
 	</b-sidebar>
 </template>
 
+<script>
+	export default {
+		data () {
+			return {
+				colors: ['system', 'light', 'dark', 'sepia', 'contrast'],
+				color: 1,
+				canCancel: []
+			}
+		},
+		methods: {
+			nextColorMode(){
+				this.color++
+				if(this.color>=5) this.color = 1
+
+				return this.colors[this.color]
+			},
+			getClasses (color) {
+				// Does not set classes on ssr when preference is system (because we don't know the preference until client-side)
+				if (this.$colorMode.unknown) return {}
+
+				return {
+					preferred: color === this.$colorMode.preference,
+					selected: color === this.$colorMode.value
+				}
+			}
+		}
+
+	}
+</script>
 
 <style lang="scss">
 	.p-1 {
@@ -69,6 +110,13 @@
 			margin: 7px;
 			margin-top: 7px;
 			margin-top: 11px;
+		}
+
+		.menu-bottom{
+			position: absolute;
+			bottom: 5px;
+			text-align: center;
+			width: 72px;
 		}
 
 	}

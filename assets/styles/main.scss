@@ -1,3 +1,4 @@
+
 :root {
 	--color: #243746;
 	--color-primary: #158876;
@@ -5,22 +6,161 @@
 	--bg: #F5F5F5;
 	--bg-secondary: #fff;
 	--border-color: #ddd;
+	$progress-border-radius: 0px;
 }
 
 .dark-mode {
 	--color: #ebf4f1;
 	--color-primary: #41b38a;
 	--color-secondary: #fdf9f3;
-	--bg: #091a28;
-	--bg-secondary: #071521;
+	--bg: #535e66;
+	--bg-secondary: #5c6671;
 	--border-color: #0d2538;
+
+	.block-score, .section{
+		fill: #ebf4f1;
+		color: #ebf4f1;
+		background-color: #5c6671 !important;
+
+		.title, .subtitle, .label, .bb-chart-arcs-title,
+		.bb-chart-arcs .bb-chart-arcs-gauge-min, .bb-chart-arcs .bb-chart-arcs-gauge-max,
+		.bb-chart-arc .bb-gauge-value, .bb text, .bb .bb-button {
+			color: #ebf4f1;
+			fill: #ebf4f1;
+		}
+
+		.bb-chart-arc path {
+			stroke: none;
+		}
+
+	}
+	.block-title{
+		color: #ebf4f1 !important;
+		background-color: #535e66 !important;
+	}
+
 }
 .sepia-mode {
 	--color: #433422;
+	--color-primary: #EABB8A;
 	--color-secondary: #504231;
 	--bg: #f1e7d0;
 	--bg-secondary: #eae0c9;
 	--border-color: #ded0bf;
+
+
+	.block-score, .section{
+		background-color: #F7EFDC !important;
+
+		.bb-chart-arc path {
+			stroke: none;
+			fill: #EABB8A !important;
+		}
+
+		#donutChart {
+			.bb-chart-arc path {
+				stroke: none;
+				fill: #ece5d4 !important;
+			}
+
+			.bb-shape.bb-arc.bb-arc-Score {
+				stroke: none;
+				fill: #EABB8A !important;
+			}
+		}
+
+		.bb-chart-arcs .bb-chart-arcs-background {
+			fill: #ece5d4 !important;
+			stroke: none;
+		}
+	}
+	.block-title{
+		// color: #f1e7d0 !important;
+		background-color: #f1e7d0 !important;
+
+		.progress {
+			background-color: #f7efdc;
+		}
+
+		progress, progress::-webkit-progress-bar, progress::-webkit-progress-value, progress::-moz-progress-bar {
+			background-color: #EABB8A;
+		}
+
+
+	}
+}
+
+.contrast-mode {
+	--color: #363636;
+	--color-primary: #363636;
+	--color-secondary: #363636;
+	--bg: #FFF;
+	--bg-secondary: #FFF;
+	--border-color: #363636;
+
+	$primary: #363636;
+
+
+	.main-content-score {
+		border-left: 1px solid #363636;
+		border-right: 1px solid #363636;
+	}
+
+	.block-score, .section{
+		fill: #363636;
+		color: #363636;
+		background-color: #FFF !important;
+
+		.title, .subtitle, .label, .bb-chart-arcs-title,
+		.bb-chart-arcs .bb-chart-arcs-gauge-min, .bb-chart-arcs .bb-chart-arcs-gauge-max,
+		.bb-chart-arc .bb-gauge-value, .bb text, .bb .bb-button {
+			color: #363636;
+			fill: #363636;
+		}
+
+		.bb-chart-arc path {
+			stroke: #363636;
+			fill: #363636 !important;
+		}
+
+		#donutChart {
+			.bb-chart-arc path {
+				stroke: #363636;
+				fill: #FFF !important;
+			}
+
+			.bb-shape.bb-arc.bb-arc-Score {
+				stroke: #363636;
+				fill: #363636 !important;
+			}
+		}
+
+		.bb-chart-arcs .bb-chart-arcs-background {
+			fill: #FFF !important;
+			stroke: #363636;
+		}
+
+	}
+
+	.block-title{
+		color: #363636 !important;
+		background-color: #FFF !important;
+		border: 1px solid #363636;
+		border-top: 0px;
+
+		.progress {
+			stroke: #363636;
+			background-color: #FFF;
+			border: 1px solid #363636;
+		}
+
+		progress, progress::-webkit-progress-bar, progress::-webkit-progress-value, progress::-moz-progress-bar {
+			background-color: #363636;
+		}
+
+
+	}
+
 }
 
 body {
@@ -45,9 +185,31 @@ a.dropdown-item, .dropdown .dropdown-menu .has-link a, button.dropdown-item {
 }
 
 .dropdown-content {
-    /* background-color: #f9f9f9; */
-    /* border-radius: 4px;
-    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02); */
-    padding-bottom: 0rem !important;
-    padding-top: 0rem !important;
+	/* background-color: #f9f9f9; */
+	/* border-radius: 4px;
+	box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02); */
+	padding-bottom: 0rem !important;
+	padding-top: 0rem !important;
 }
+
+
+.b-sidebar .sidebar-content .menu-list a.is-active {
+	background-color: #363636 !important;
+	color: #d7d7d7 !important;
+	box-shadow: -50px 0px 0px -22px #1ca5b8  !important;
+}
+
+.b-sidebar .sidebar-content .menu-list a.is-active:hover {
+	background-color: #4D4D4D !important;
+	color: #d7d7d7 !important;
+}
+
+.b-sidebar .sidebar-content .menu-bottom .menu-list a.is-active {
+	box-shadow: none !important;
+}
+
+.progress {
+    border-radius: 2px !important;
+}
+
+

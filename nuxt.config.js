@@ -11,7 +11,7 @@ export default {
 		{ hid: 'description', name: 'description', content: '' }
 	],
 	link: [
-		{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+		{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
 	]
 	},
 
@@ -35,12 +35,8 @@ export default {
 	// Modules (https://go.nuxtjs.dev/config-modules)
 	modules: [
 		'nuxt-buefy', // https://go.nuxtjs.dev/buefy
-		'@nuxtjs/axios', // https://go.nuxtjs.dev/axios
 		'@nuxt/content', // https://go.nuxtjs.dev/content
 	],
-
-	// Axios module configuration (https://go.nuxtjs.dev/config-axios)
-	axios: {},
 
 	// Content module configuration (https://go.nuxtjs.dev/config-content)
 	content: {},

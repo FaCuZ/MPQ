@@ -103,6 +103,7 @@
 				score: [],
 				name: '',
 				title: ''
+
 			}
 		},
 		async asyncData({ params, $http }) {
@@ -152,22 +153,11 @@
 	.block-title {
 		padding: 1rem;
 		background-color: #F5F5F5;
-		border-radius: 0px 0px 15px 15px;
+		border-radius: 0px 0px 5px 5px;
 	}
-
-	.dark-mode .block-title{
-		color: #F5F5F5 !important;
-		background-color: #091A28;
-	}
-
 
 	.section {
 		padding: 0rem 1.5rem !important;
 		background-color: #FAFAFA;
-		/* background-color: #FEFEFE; */
-		/* background-color: #F9F9FA; */
-		/* background-color: #f5f5f5 */
-
 	}
-
 </style>

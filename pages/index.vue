@@ -42,93 +42,93 @@
 </template>
 
 <script>
-import debounce from 'lodash/debounce'
+	import debounce from 'lodash/debounce'
 
-export default {
-  	layout: 'home',
-	data() {
-		return {
-			data: [],
-			name: '',
-			selected: null,
-			isFetching: false
+	export default {
+		layout: 'home',
+		data() {
+			return {
+				data: [],
+				name: '',
+				selected: null,
+				isFetching: false
 
 
-		}
-	},
-	computed: {
-		filteredDataArray() {
-			return this.data.filter((option) => {
-				return option
-					.toString()
-					.toLowerCase()
-					.indexOf(this.name.toLowerCase()) >= 0
-			})
-		}
-	},
-	methods: {
-		openPackage(option) {
-			if(option) this.$router.push('/package/' + option.package.name.toLowerCase())
-			this.data = []
-		},
-		getAsyncData: debounce(async function (name) {
-			if (!name.length) {
-				this.data = []
-				return
 			}
-			this.isFetching = true
+		},
+		computed: {
+			filteredDataArray() {
+				return this.data.filter((option) => {
+					return option
+						.toString()
+						.toLowerCase()
+						.indexOf(this.name.toLowerCase()) >= 0
+				})
+			}
+		},
+		methods: {
+			openPackage(option) {
+				if(option) this.$router.push('/package/' + option.package.name.toLowerCase())
+				this.data = []
+			},
+			getAsyncData: debounce(async function (name) {
+				if (!name.length) {
+					this.data = []
+					return
+				}
+				this.isFetching = true
 
-			const json = await fetch(`https://api.npms.io/v2/search?q=${name}+not:deprecated&size=15`)
-									.then(res => res.json())
-									.catch((error) => {
-										this.data = []
-										throw error
-									})
+				const json = await fetch(`https://api.npms.io/v2/search?q=${name}+not:deprecated&size=15`)
+										.then(res => res.json())
+										.catch((error) => {
+											this.data = []
+											throw error
+										})
 
-			this.data = []
-			json.results.forEach((item) => this.data.push(item))
-			this.isFetching = false
-		}, 500)
-	},
-}
+				this.data = []
+				json.results.forEach((item) => this.data.push(item))
+				this.isFetching = false
+			}, 500)
+		},
+	}
 </script>
 
 <style scoped>
-.logo-img {
-	height: 105px;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 40px;
-	margin-bottom: 5px;
-}
+	.logo-img {
+		height: 105px;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 40px;
+		margin-bottom: 5px;
+	}
 
-.logo {
-	text-align: center;
-	margin-bottom: 30px;
-	font-size: 20px;
-}
+	.logo {
+		text-align: center;
+		margin-bottom: 30px;
+		font-size: 20px;
+	}
 
-.search-index {
-	width: 600px;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
+	.search-index {
+		width: 600px;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
 
-.title-search {
-	text-transform: capitalize;
-}
-.media-right {
-	text-align: center;
-}
+	.title-search {
+		text-transform: capitalize;
+	}
+	.media-right {
+		text-align: center;
+	}
 
-.description-search {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	max-width: 29rem;
-	display: block;
-}
+	.description-search {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 29rem;
+		display: block;
+	}
 
 </style>

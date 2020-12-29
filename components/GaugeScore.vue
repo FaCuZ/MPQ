@@ -21,11 +21,13 @@ export default {
 		},
 	},
 	async mounted() {
-		bb.generate({
+		let percent = parseInt(this.value*100)
+
+		let gaugeGen = bb.generate({
 			components: true,
 			data: {
 				type: gauge(),
-				columns: [["score", parseInt(this.value*100)]],
+				columns: [["score", 0]],
 				/*onclick: function(d, i) { // TODO sacar o usar para algo
 					console.log("onclick", d, i);
 				},
@@ -36,6 +38,9 @@ export default {
 					console.log("onout", d, i);
 				},*/
 			},
+			transition: {
+				duration: 2000
+			},
 			bindto: "#"+this.name,
 			gauge: { width: 40 },
 			legend: { show: false },
@@ -43,7 +48,14 @@ export default {
 			color: { pattern: ["#1CA5B8"] },
 
 		});
-	}
+
+
+		setTimeout(function() {
+		 	gaugeGen.load({
+		 		columns: [["score", percent]]
+		 	})
+		}, 100, percent)
+	},
 }
 </script>
 
