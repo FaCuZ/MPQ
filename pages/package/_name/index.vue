@@ -2,30 +2,30 @@
 	<section class="section">
 		<div class="block block-title">
 			<h1 class="title">
-				{{ title }}
-				<span class="tag">{{ json.collected.metadata.version }}</span>
+				{{ metadata.title }}
+				<span class="tag">{{ metadata.version }}</span>
 			</h1>
-			<h2 class="subtitle">{{ json.collected.metadata.description }}</h2>
+			<h2 class="subtitle">{{ metadata.description }}</h2>
 
 			<div class="columns is-gapless is-multiline">
 				<div class="column is-one-quarter final-score">
-					<Score title="Score" :value=score.final></Score>
+					<Score title="Score" :value=score.final :key=force></Score>
 				</div>
 				<div class="column">
 					<ul class="progress-list is-vcentered">
 						<li class="progress-line">
 							<b-field label="Maintenance" horizontal>
-								<b-progress type="is-primary" :value=score.detail.maintenance*100 format="percent" show-value></b-progress>
+								<b-progress type="is-primary" :value=score.maintenance format="percent" show-value></b-progress>
 							</b-field>
 						</li>
 						<li class="progress-line">
 							<b-field label="Popularity" horizontal>
-								<b-progress type="is-primary" :value=score.detail.popularity*100 format="percent" show-value></b-progress>
+								<b-progress type="is-primary" :value=score.popularity format="percent" show-value></b-progress>
 							</b-field>
 						</li>
 						<li class="progress-line">
 							<b-field label="Quality" horizontal >
-								<b-progress type="is-primary" :value=score.detail.quality*100 format="percent" show-value></b-progress>
+								<b-progress type="is-primary" :value=score.quality format="percent" show-value></b-progress>
 							</b-field>
 						</li>
 					</ul>
@@ -37,16 +37,16 @@
 			<h1 class="title">Maintenace</h1>
 			<div class="columns is-gapless">
 				<div class="column is-one-quarter">
-					<GaugeScore name="gauge1" title="Releases Frequency" :value=json.evaluation.maintenance.releasesFrequency></GaugeScore>
+					<GaugeScore name="gauge1" title="Releases Frequency" :value=evaluation.maintenance.releasesFrequency :key=force></GaugeScore>
 				</div>
 				<div class="column is-one-quarter">
-					<GaugeScore name="gauge2" title="Commits Frequency" :value=json.evaluation.maintenance.commitsFrequency></GaugeScore>
+					<GaugeScore name="gauge2" title="Commits Frequency" :value=evaluation.maintenance.commitsFrequency :key=force></GaugeScore>
 				</div>
 				<div class="column is-one-quarter">
-					<GaugeScore name="gauge3" title="Open Issues" :value=json.evaluation.maintenance.openIssues></GaugeScore>
+					<GaugeScore name="gauge3" title="Open Issues" :value=evaluation.maintenance.openIssues :key=force></GaugeScore>
 				</div>
 				<div class="column is-one-quarter">
-					<GaugeScore name="gauge4" title="Issues Distribution" :value=json.evaluation.maintenance.issuesDistribution></GaugeScore>
+					<GaugeScore name="gauge4" title="Issues Distribution" :value=evaluation.maintenance.issuesDistribution :key=force></GaugeScore>
 				</div>
 			</div>
 		</div>
@@ -55,16 +55,16 @@
 			<h1 class="title">Popularity</h1>
 			<div class="columns is-gapless">
 				<div class="column is-one-quarter">
-					<KpiScore name="kpi1" title="Community Interest" :value=json.evaluation.popularity.communityInterest></KpiScore>
+					<KpiScore name="kpi1" title="Community Interest" :value=evaluation.popularity.communityInterest :key=force></KpiScore>
 				</div>
 				<div class="column is-one-quarter">
-					<KpiScore name="kpi2" title="Downloads Count" :value=json.evaluation.popularity.downloadsCount></KpiScore>
+					<KpiScore name="kpi2" title="Downloads Count" :value=evaluation.popularity.downloadsCount :key=force></KpiScore>
 				</div>
 				<div class="column is-one-quarter">
-					<KpiScore name="kpi3" title="Downloads Acceleration" :value=json.evaluation.popularity.downloadsAcceleration></KpiScore>
+					<KpiScore name="kpi3" title="Downloads Acceleration" :value=evaluation.popularity.downloadsAcceleration :key=force></KpiScore>
 				</div>
 				<div class="column is-one-quarter">
-					<KpiScore name="kpi4" title="Dependents Count" :value=json.evaluation.popularity.dependentsCount></KpiScore>
+					<KpiScore name="kpi4" title="Dependents Count" :value=evaluation.popularity.dependentsCount :key=force></KpiScore>
 				</div>
 			</div>
 		</div>
@@ -73,16 +73,16 @@
 			<h1 class="title">Quality</h1>
 			<div class="columns is-gapless">
 				<div class="column is-one-quarter">
-					<GaugeScore name="gauge5" title="Carefulness" :value=json.evaluation.quality.carefulness></GaugeScore>
+					<GaugeScore name="gauge5" title="Carefulness" :value=evaluation.quality.carefulness :key=force></GaugeScore>
 				</div>
 				<div class="column is-one-quarter">
-					<GaugeScore name="gauge6" title="Tests" :value=json.evaluation.quality.tests></GaugeScore>
+					<GaugeScore name="gauge6" title="Tests" :value=evaluation.quality.tests :key=force></GaugeScore>
 				</div>
 				<div class="column is-one-quarter">
-					<GaugeScore name="gauge7" title="Health" :value=json.evaluation.quality.health></GaugeScore>
+					<GaugeScore name="gauge7" title="Health" :value=evaluation.quality.health :key=force></GaugeScore>
 				</div>
 				<div class="column is-one-quarter">
-					<GaugeScore name="gauge8" title="Branding" :value=json.evaluation.quality.branding></GaugeScore>
+					<GaugeScore name="gauge8" title="Branding" :value=evaluation.quality.branding :key=force></GaugeScore>
 				</div>
 			</div>
 		</div>
@@ -92,30 +92,27 @@
 
 <script>
 	import Sidebar from '~/components/Sidebar.vue'
+	import Readme from '~/components/Readme.vue'
+	import { mapGetters, mapActions } from 'vuex'
 
 	export default {
 		layout: 'score',
-		components: { Sidebar },
+		components: { Sidebar, Readme },
 		scrollToTop: true,
-		data() {
-			return {
-				json: [],
-				score: [],
-				name: '',
-				title: ''
-
-			}
+		computed: {
+			...mapGetters('npms', ['json', 'force', 'metadata', 'score', 'evaluation'])
 		},
-		async asyncData({ params, $http }) {
-			const json = await fetch(`https://api.npms.io/v2/package/${params.name}`).then(res => res.json())
-
-			const score = json.score
-			const title = json.collected.metadata.name
-
-			return { json, score, title }
+		methods: {
+			...mapActions("npms", ['change']),
 		},
-	}
+		//created() {
+		mounted(){
+			this.change(this.$route.params.name)
+		},
+  }
 </script>
+
+
 
 
 <style scoped>

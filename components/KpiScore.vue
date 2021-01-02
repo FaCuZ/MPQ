@@ -3,7 +3,6 @@
 		{{ title }}
 		<div class="title title-kpi">
 			{{ kpi }}
-
 		</div>
 	</div>
 </template>
@@ -30,7 +29,8 @@
 	export default {
 		data () {
 			return {
-				kpi: sn(this.value)
+				// kpi: sn(parseInt(this.value.toFixed(2)))
+				kpi: sn(parseFloat(this.value.toFixed(2)))
 			}
 		},
 		props: {

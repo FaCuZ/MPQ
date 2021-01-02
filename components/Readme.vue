@@ -2,56 +2,13 @@
 		<b-sidebar
 			position="fixed"
 			fullheight
-			mobile="hide"
-			reduce
-			type="is-dark"
-			:can-cancel=canCancel
-			open
-			class="sidebar-menu"
+			fullwidth
+			v-model="open"
+			right
 		>
 		<div class="p-1">
-			<div class="block img-logo">
-				<NuxtLink to="/">
-					<img src="~/assets/img/logo.png" alt="MPQ"/>
-				</NuxtLink>
-			</div>
-
-			<b-menu class="is-custom-mobile">
-				<b-menu-list>
-					<b-tooltip label="Dashboard" position="is-right">
-						<n-link class="menu-n-link" to='/package/axios' active>
-							<b-icon icon="chart-pie"></b-icon>
-						</n-link>
-					</b-tooltip>
-
-					<b-tooltip label="Readme" position="is-right">
-						<n-link class="menu-n-link" to='/package/axios/readme'>
-							<b-icon icon="text-box-outline"></b-icon>
-						</n-link>
-					</b-tooltip>
-
-					<b-tooltip label="Search" position="is-right">
-						<n-link class="menu-n-link" to='/'>
-							<b-icon icon="magnify"></b-icon>
-						</n-link>
-					</b-tooltip>
-
-					<b-tooltip label="Export" position="is-right">
-						<n-link class="menu-n-link" to='/'>
-							<b-icon icon="export-variant"></b-icon>
-						</n-link>
-					</b-tooltip>
-				</b-menu-list>
-
-			</b-menu>
-			<b-menu class="is-custom-mobile menu-bottom">
-				<b-menu-list>
-
-					<b-tooltip :label="colorMode()" position="is-right">
-						<b-menu-item icon="white-balance-sunny"	@click="$colorMode.preference = nextColorMode()"></b-menu-item>
-					</b-tooltip>
-				</b-menu-list>
-			</b-menu>
+			<div class="title">Title</div>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque voluptatem, voluptatum praesentium autem recusandae suscipit dolore quod, corporis maiores porro ipsam veniam vero doloribus quibusdam earum tempora rem quia voluptatibus.</p>
 		</div>
 	</b-sidebar>
 </template>
@@ -60,41 +17,21 @@
 	export default {
 		data () {
 			return {
-				colors: ['System', 'Light', 'Dark', 'Sepia', 'Contrast'],
-				color: 1,
+				open: true,
 				canCancel: []
 			}
 		},
 		methods: {
-			colorMode(){
-				return 'Color mode: '+ this.colors[this.color]
-			},
-			nextColorMode(){
-				this.color++
-				if(this.color>=5) this.color = 1
 
-				return this.colors[this.color].toLowerCase()
-			},
-			getClasses (color) {
-				// Does not set classes on ssr when preference is system (because we don't know the preference until client-side)
-				if (this.$colorMode.unknown) return {}
-
-				return {
-					preferred: color === this.$colorMode.preference,
-					selected: color === this.$colorMode.value
-				}
-			}
 		}
 
 	}
 </script>
 
 <style lang="scss">
+/*
 	.p-1 {
 		padding: 1em;
-	}
-	.sidebar-menu {
-		z-index: 9000;
 	}
 	.sidebar-page {
 		display: flex;
@@ -112,7 +49,6 @@
 
 	.b-sidebar .sidebar-content {
 		width: 240px;
-		overflow: visible !important;
 		//min-height: 100vh;
 		.menu-list a:hover {
 			background-color: #4d4d4d;
@@ -129,7 +65,6 @@
 			color: #d7d7d7;
 			font-size: 25px;
 			text-align: center;
-			padding: 0.5em 0.95em;
 		}
 		.img-logo {
 			-webkit-filter: invert(1);
@@ -144,15 +79,6 @@
 			bottom: 5px;
 			text-align: center;
 			width: 72px;
-		}
-
-		.tooltip-content {
-			margin-left: -3px;
-			border-radius: 0px 4px 4px 0px !important;
-		}
-
-		.b-tooltip {
-			width: 100%;
 		}
 
 	}

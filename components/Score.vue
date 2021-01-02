@@ -61,9 +61,6 @@
 						["Score", percent],
 						["Remains",1-percent]
 					],
-					donut: {
-						title: this.title+"\n100%",
-					}
 				})
 			}, 100, percent)
 

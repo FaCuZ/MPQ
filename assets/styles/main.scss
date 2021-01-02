@@ -193,7 +193,8 @@ a.dropdown-item, .dropdown .dropdown-menu .has-link a, button.dropdown-item {
 }
 
 
-.b-sidebar .sidebar-content .menu-list a.is-active {
+.b-sidebar .sidebar-content .menu-list a.is-active,
+.menu-n-link.nuxt-link-exact-active.nuxt-link-active {
 	background-color: #363636 !important;
 	color: #d7d7d7 !important;
 	box-shadow: -50px 0px 0px -22px #1ca5b8  !important;
@@ -211,5 +212,4 @@ a.dropdown-item, .dropdown .dropdown-menu .has-link a, button.dropdown-item {
 .progress {
     border-radius: 2px !important;
 }
-
 
