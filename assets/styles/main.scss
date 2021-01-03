@@ -39,7 +39,57 @@
 		background-color: #535e66 !important;
 	}
 
+	.markdown-body {
+		.hljs {
+			color: #000 !important;
+			// code {
+			// 	color: red !important;
+			// 	background-color: #535E66 !important;
+			// }
+		}
+
+		a {
+			color: #9ecdf0 !important;
+
+		}
+
+		/*th, td {
+			color: blue !important;
+			background-color: red !important;
+		}*/
+		table {
+			tr, th, td {
+				background-color: #5c6671 !important;
+				border: 1px solid #4a4a4a !important;
+			}
+
+			td > code {
+				color: #6abaf4 !important;
+			}
+
+			th, td, td> strong {
+				color: #ebf4f1 !important;
+			}
+
+
+			tr:nth-child(2n) {
+				background-color: #535e66 !important;
+			}
+		}
+
+		p> code, p> a> code {
+			color: #6abaf4 !important;
+			background-color: #535E66 !important;
+		}
+
+		h1, h2 {
+			border-bottom: 1px solid #000 !important;
+		}
+
+	}
+
 }
+
 .sepia-mode {
 	--color: #433422;
 	--color-primary: #EABB8A;
@@ -78,6 +128,25 @@
 		// color: #f1e7d0 !important;
 		background-color: #f1e7d0 !important;
 
+
+		progress {
+			//border: 1px solid #EABB8A !important;
+			background: #f7efdc !important;
+		}
+
+		progress::-moz-progress-bar {
+			background: #EABB8A !important;
+		}
+
+		progress::-webkit-progress-value {
+			background: #EABB8A !important;
+		}
+
+		progress::-webkit-progress-bar {
+			background: #f7efdc;
+		}
+
+/*
 		.progress {
 			background-color: #f7efdc;
 		}
@@ -85,7 +154,7 @@
 		progress, progress::-webkit-progress-bar, progress::-webkit-progress-value, progress::-moz-progress-bar {
 			background-color: #EABB8A;
 		}
-
+*/
 
 	}
 }
@@ -99,7 +168,6 @@
 	--border-color: #363636;
 
 	$primary: #363636;
-
 
 	.main-content-score {
 		border-left: 1px solid #363636;
@@ -148,18 +216,64 @@
 		border: 1px solid #363636;
 		border-top: 0px;
 
-		.progress {
-			stroke: #363636;
-			background-color: #FFF;
-			border: 1px solid #363636;
+		progress {
+			border: 1px solid #363636 !important;
+			background: #ffffff !important;
 		}
 
-		progress, progress::-webkit-progress-bar, progress::-webkit-progress-value, progress::-moz-progress-bar {
-			background-color: #363636;
+		progress::-moz-progress-bar {
+			background: #363636 !important;
 		}
 
+		progress::-webkit-progress-value {
+			background: #363636 !important;
+		}
+
+		progress::-webkit-progress-bar {
+			background: #FFF;
+		}
 
 	}
+
+	.markdown-body {
+		color: #363636 !important;
+
+		img {
+			filter: grayscale(100%) contrast(150%);
+		}
+
+		.hljs {
+			border: 1px solid #363636 !important;
+			background-color: #fff !important;
+			color: #363636 !important;
+			code {
+				border: none !important;
+			}
+		}
+
+		code, .hljs-deletion, .hljs-number, .hljs-quote, .hljs-selector-class,
+		.hljs-selector-id, .hljs-string, .hljs-template-tag, .hljs-type .hljs-addition,
+		.hljs-built_in, .hljs-bullet, .hljs-code, .hljs-literal {
+			color: #363636 !important;
+		}
+
+		a {
+			color: #363636 !important;
+			text-decoration: underline !important;
+		}
+
+		th, td, code {
+			border: 1px solid #363636 !important;
+			background-color: #FFF;
+			color: #363636 !important;
+		}
+
+		.markdown-body h1, .markdown-body h2 {
+			border-bottom: 1px solid #363636 !important;
+		}
+
+	}
+
 
 }
 

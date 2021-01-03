@@ -91,13 +91,10 @@
 
 
 <script>
-	import Sidebar from '~/components/Sidebar.vue'
-	import Readme from '~/components/Readme.vue'
 	import { mapGetters, mapActions } from 'vuex'
 
 	export default {
 		layout: 'score',
-		components: { Sidebar, Readme },
 		scrollToTop: true,
 		computed: {
 			...mapGetters('npms', ['json', 'force', 'metadata', 'score', 'evaluation'])
@@ -105,8 +102,8 @@
 		methods: {
 			...mapActions("npms", ['change']),
 		},
-		//created() {
-		mounted(){
+		created() {
+			// TODO ver porque carga 2 veces (1 en ssr)
 			this.change(this.$route.params.name)
 		},
   }
@@ -156,5 +153,7 @@
 	.section {
 		padding: 0rem 1.5rem !important;
 		background-color: #FAFAFA;
+		min-height: 100vh;
+		padding-bottom: 60px !important;
 	}
 </style>

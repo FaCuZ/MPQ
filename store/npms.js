@@ -5,6 +5,7 @@ export const state = () => ({
 		title: '...',
 		version: '...',
 		description: '...',
+		readme: '...',
 	},
 	score: {
 		final: 0,
@@ -49,7 +50,10 @@ export const mutations = {
 		state.metadata = {
 			title: json.collected.metadata.name,
 			version: json.collected.metadata.version,
-			description: json.collected.metadata.description
+			description: json.collected.metadata.description,
+			readme: markdown(json.collected.metadata.readme, json.collected.metadata.links.repository)
+
+
 		}
 
 		state.score = {
@@ -102,5 +106,43 @@ export const actions = {
 			}
 		}
 	}
+}
+
+
+const mdit = require('markdown-it')
+const mdRL = require('markdown-it-replace-link')
+const hljs = require('highlight.js')
+
+function markdown(text, github) {
+	let options = {
+		injected: true,
+		html: true,
+		xhtmlOut:  true,
+		linkify: false, // Autoconvert URL-like text to links
+		highlight: function (str, lang) {
+			try {
+				if (lang && hljs.getLanguage(lang)) {
+						return '<pre class="hljs"><code>' +
+							hljs.highlight(lang, str, true).value +
+							'</code></pre>'
+				}
+
+				return '<pre class="hljs"><code>' + mdit.utils.escapeHtml(str) + '</code></pre>'
+			} catch (error) {
+				console.error(error)
+				return '<pre class="hljs"><code>' + str + '</code></pre>'
+			}
+
+		},
+
+		// replaceLink: function (link, env) {
+		// 	console.log('replaceLink', link, env)
+
+		// 	return github + '/blob/master/' + link
+		// 	//return link.replace(/\.\//, 'blebleblablabala')//.replace(/.md$/, '/')
+		// }
+	}
+
+	return mdit(options).use(mdRL).render(text)
 }
 

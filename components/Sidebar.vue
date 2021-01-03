@@ -18,29 +18,13 @@
 
 			<b-menu class="is-custom-mobile">
 				<b-menu-list>
-					<b-tooltip label="Dashboard" position="is-right">
-						<n-link class="menu-n-link" to='/package/axios' active>
-							<b-icon icon="chart-pie"></b-icon>
-						</n-link>
-					</b-tooltip>
-
-					<b-tooltip label="Readme" position="is-right">
-						<n-link class="menu-n-link" to='/package/axios/readme'>
-							<b-icon icon="text-box-outline"></b-icon>
-						</n-link>
-					</b-tooltip>
-
-					<b-tooltip label="Search" position="is-right">
-						<n-link class="menu-n-link" to='/'>
-							<b-icon icon="magnify"></b-icon>
-						</n-link>
-					</b-tooltip>
-
-					<b-tooltip label="Export" position="is-right">
-						<n-link class="menu-n-link" to='/'>
-							<b-icon icon="export-variant"></b-icon>
-						</n-link>
-					</b-tooltip>
+					<div v-for="(item, index) in items" :key="index">
+						<b-tooltip :label="item.label" position="is-right">
+							<n-link class="menu-n-link" :to="item.to">
+								<b-icon :icon="item.icon"></b-icon>
+							</n-link>
+						</b-tooltip>
+					</div>
 				</b-menu-list>
 
 			</b-menu>
@@ -62,7 +46,29 @@
 			return {
 				colors: ['System', 'Light', 'Dark', 'Sepia', 'Contrast'],
 				color: 1,
-				canCancel: []
+				canCancel: [],
+				items: [{
+					to: '/package/' + this.$route.params.name,
+					label: 'Dashboard',
+					icon: 'chart-pie'
+				},{
+					to: '/package/'+this.$route.params.name+'/readme',
+					label: "Readme",
+					icon: "text-box-outline"
+				},{
+					to: '/',
+					label: "Compare",
+					icon: "file-compare"
+				}/*,{
+					to: '/',
+					label: "Search",
+					icon: "magnify"
+				},{
+					to: '/',
+					label: "Export",
+					icon: "export-variant"
+				}*/
+				]
 			}
 		},
 		methods: {

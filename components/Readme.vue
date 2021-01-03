@@ -7,26 +7,32 @@
 			right
 		>
 		<div class="p-1">
-			<div class="title">Title</div>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque voluptatem, voluptatum praesentium autem recusandae suscipit dolore quod, corporis maiores porro ipsam veniam vero doloribus quibusdam earum tempora rem quia voluptatibus.</p>
+			<div class="title">{{ metadata.title }}</div>
+			<p>{{ metadata.readme }}</p>
 		</div>
 	</b-sidebar>
 </template>
 
 <script>
+	import Sidebar from '~/components/Sidebar.vue'
+	import { mapGetters, mapActions } from 'vuex'
+
 	export default {
-		data () {
-			return {
-				open: true,
-				canCancel: []
-			}
+		layout: 'score',
+		components: { Sidebar },
+		scrollToTop: true,
+		computed: {
+			...mapGetters('npms', ['metadata'])
 		},
 		methods: {
-
-		}
-
-	}
+			...mapActions("npms", ['change']),
+		},
+		created() {
+			this.change(this.$route.params.name)
+		},
+  }
 </script>
+
 
 <style lang="scss">
 /*

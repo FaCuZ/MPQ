@@ -1,5 +1,4 @@
 <template>
-
 	<div class="sidebar-page">
 		<section class="sidebar-layout">
 			<Sidebar></Sidebar>
@@ -9,5 +8,4 @@
 			</div>
 		</section>
 	</div>
-
 </template>

@@ -11,12 +11,23 @@ export default {
 		{ hid: 'description', name: 'description', content: '' }
 	],
 	link: [
-		{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
+		{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+		{ rel: 'stylesheet', href:'https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css' }
 	]
 	},
 
 	// Global CSS (https://go.nuxtjs.dev/config-css)
-	css: ['@/assets/styles/main.scss', '@/assets/styles/bulma.scss', '~/assets/styles/Insight.css'],
+	css: [
+		'@/assets/styles/main.scss',
+		'@/assets/styles/bulma.scss',
+		'@/assets/styles/Insight.css',
+		'@/assets/styles/markdown.scss',
+		'@/assets/styles/highlight.min.css',
+	],
+
+	buefy: {
+		materialDesignIcons: false,
+	},
 
 	loading: {
 		color: '#1CA5B8',
@@ -35,11 +46,7 @@ export default {
 	// Modules (https://go.nuxtjs.dev/config-modules)
 	modules: [
 		'nuxt-buefy', // https://go.nuxtjs.dev/buefy
-		'@nuxt/content', // https://go.nuxtjs.dev/content
 	],
-
-	// Content module configuration (https://go.nuxtjs.dev/config-content)
-	content: {},
 
 	// Build Configuration (https://go.nuxtjs.dev/config-build)
 	build: {}
