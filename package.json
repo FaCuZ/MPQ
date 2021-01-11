@@ -10,11 +10,12 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"@gerhobbelt/markdown-it-github-headings": "^2.0.0-1",
+		"@nuxtjs/markdownit": "^1.2.10",
 		"billboard.js": "^2.2.0-next.3",
 		"core-js": "^3.6.5",
-		"@nuxtjs/markdownit": "^1.2.10",
-		"markdown-it-replace-link": "^1.1.0",
 		"highlight.js": "^10.5.0",
+		"markdown-it-replace-link": "^1.1.0",
 		"nuxt": "^2.14.6",
 		"nuxt-buefy": "^0.4.3",
 		"short-number": "^1.0.7"

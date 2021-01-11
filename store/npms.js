@@ -2,10 +2,11 @@ export const state = () => ({
 	json: { value: 'store' },
 	force: 0,
 	metadata: {
-		title: '...',
-		version: '...',
-		description: '...',
-		readme: '...',
+		title: '',
+		version: '',
+		description: '',
+		repository: '',
+		readme: '',
 	},
 	score: {
 		final: 0,
@@ -51,8 +52,8 @@ export const mutations = {
 			title: json.collected.metadata.name,
 			version: json.collected.metadata.version,
 			description: json.collected.metadata.description,
+			repository: json.collected.metadata.links.repository,
 			readme: markdown(json.collected.metadata.readme, json.collected.metadata.links.repository)
-
 
 		}
 
@@ -91,18 +92,19 @@ export const mutations = {
 
 export const actions = {
 	async change({ commit, state }, name) {
+		if(process.client){ // NOTE carga solo si esta del lado del server. Poder del lado del cliente??
+			if(state.metadata.title !== name){
+				console.log('CARGA: ', process.server, 'name:', name ) // NOTE
 
-		if(state.metadata.title !== name){
-			console.log('CARGA') // NOTE
+				const json = await fetch(`https://api.npms.io/v2/package/${name}`)
+					.then(res => res.json())
 
-			const json = await fetch(`https://api.npms.io/v2/package/${name}`)
-				.then(res => res.json())
-
-			if(json.code && json.code === 'NOT_FOUND'){
-				console.log('404: Package not found') // FIXME throw 404
-				//throw({ statusCode: 404, message: 'Pk not found' })
-			} else {
-				commit('CHANGE', json)
+				if(json.code && json.code === 'NOT_FOUND'){
+					console.log('404: Package not found') // FIXME throw 404
+					//throw({ statusCode: 404, message: 'Pk not found' })
+				} else {
+					commit('CHANGE', json)
+				}
 			}
 		}
 	}
@@ -112,37 +114,62 @@ export const actions = {
 const mdit = require('markdown-it')
 const mdRL = require('markdown-it-replace-link')
 const hljs = require('highlight.js')
+const mdAnchor = require('@gerhobbelt/markdown-it-github-headings') // FIXME No funcionan el link
 
 function markdown(text, github) {
 	let options = {
 		injected: true,
 		html: true,
 		xhtmlOut:  true,
-		linkify: false, // Autoconvert URL-like text to links
+		linkify: false,
 		highlight: function (str, lang) {
 			try {
 				if (lang && hljs.getLanguage(lang)) {
-						return '<pre class="hljs"><code>' +
-							hljs.highlight(lang, str, true).value +
-							'</code></pre>'
+						return '<pre class="hljs"><code>' + hljs.highlight(lang, str, true).value +	'</code></pre>'
 				}
 
 				return '<pre class="hljs"><code>' + mdit.utils.escapeHtml(str) + '</code></pre>'
 			} catch (error) {
-				console.error(error)
+				console.error(error) // FIXME ver porque tira error a veces.
 				return '<pre class="hljs"><code>' + str + '</code></pre>'
 			}
 
 		},
-
-		// replaceLink: function (link, env) {
-		// 	console.log('replaceLink', link, env)
-
-		// 	return github + '/blob/master/' + link
-		// 	//return link.replace(/\.\//, 'blebleblablabala')//.replace(/.md$/, '/')
-		// }
 	}
 
-	return mdit(options).use(mdRL).render(text)
-}
+	try {
 
+		const md = new mdit(options)
+
+		// Fix hljs code_block error.
+		const proxy = (tokens, idx, options, env, self) => self.renderToken(tokens, idx, options);
+		const defaultCodeBlockRenderer = md.renderer.rules.code_block || proxy;
+
+		md.renderer.rules.code_block = function(tokens, idx, options, env, self) {
+			tokens[idx].attrJoin("class", "hljs-fallback");
+			return defaultCodeBlockRenderer(tokens, idx, options, env, self)
+		};
+
+		let render = md.use(mdAnchor).use(mdRL).render(text)
+
+		// Fix github images when te path is relative.
+		const regexp = /src="(.*?)"/gmi
+		let matches = Array.from(render.matchAll(regexp), m => m[1])
+
+		const pk = 'https://raw.githubusercontent.com/' + github.match(/m\/?(.*?)$/is)[1] + '/HEAD/'
+
+		matches.forEach(img => {
+			var r = new RegExp('^(?:[a-z]+:)?//', 'i')
+
+			if(!r.test(img)) render = render.replace(img, pk + img)
+
+		})
+
+		return render
+
+	} catch (error) {
+		console.log(error) // NOTE
+		return ''
+	}
+
+}

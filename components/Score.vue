@@ -50,7 +50,7 @@
 				},
 				donut: {
 					title: this.title+"\n" + parseInt(this.value*100) + "%",
-					width: 16,
+					width: 18,
 					label: { show: false }
 				},
 			});

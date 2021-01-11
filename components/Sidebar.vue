@@ -52,14 +52,24 @@
 					label: 'Dashboard',
 					icon: 'chart-pie'
 				},{
-					to: '/package/'+this.$route.params.name+'/readme',
-					label: "Readme",
+					to: '/package/'+this.$route.params.name+'/info',
+					label: "Information",
 					icon: "text-box-outline"
 				},{
-					to: '/',
+					to: '/package/'+this.$route.params.name+'/vs',
 					label: "Compare",
 					icon: "file-compare"
-				}/*,{
+				},{
+					to: '/package/'+this.$route.params.name+'/downloads',
+					label: "Downloads",
+					icon: "chart-areaspline"
+				},{
+					to: '/package/'+this.$route.params.name+'/dependence',
+					label: "Dependence",
+					icon: "package-variant"
+				}
+
+				/*,{
 					to: '/',
 					label: "Search",
 					icon: "magnify"
