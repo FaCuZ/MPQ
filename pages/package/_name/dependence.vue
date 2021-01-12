@@ -9,15 +9,30 @@
 		</div>
 
 		<h1 class="title">
-			Listado de dependencias
+			Dependencies
 		</h1>
-
 		<ul>
-			<li>Grafo de dependencias</li>
-			<li>Listado de dependencias directas</li>
-			<li>Listado de dependencias de desarrollo</li>
-			<li>Listado de dependencias indirectas</li>
+			<li v-for="(item, index) in metadata.dependencies" :key="index">
+				<n-link to="/">
+					<b-icon icon="package"></b-icon> {{ item.name }} - {{ item.version }}
+				</n-link>
+			</li>
 		</ul>
+
+		<br/>
+
+		<h1 class="title">
+			Developer dependencies
+		</h1>
+		<ul>
+			<li v-for="(item, index) in metadata.devDependencies" :key="index">
+				<n-link to="/">
+					<b-icon icon="package"></b-icon> {{ item.name }} - {{ item.version }}
+				</n-link>
+			</li>
+		</ul>
+
+		<FooterScore></FooterScore>
 	</section>
 </template>
 

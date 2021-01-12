@@ -1,11 +1,13 @@
 export const state = () => ({
-	json: { value: 'store' },
+	json: { },
 	force: 0,
 	metadata: {
 		title: '',
 		version: '',
 		description: '',
 		repository: '',
+		dependencies: [],
+		devDependencies: [],
 		readme: '',
 	},
 	score: {
@@ -53,6 +55,8 @@ export const mutations = {
 			version: json.collected.metadata.version,
 			description: json.collected.metadata.description,
 			repository: json.collected.metadata.links.repository,
+			dependencies: Object.entries(json.collected.metadata.dependencies).map(([name, version]) => ({name,version})),
+			devDependencies: Object.entries(json.collected.metadata.devDependencies).map(([name, version]) => ({name,version})),
 			readme: markdown(json.collected.metadata.readme, json.collected.metadata.links.repository)
 
 		}

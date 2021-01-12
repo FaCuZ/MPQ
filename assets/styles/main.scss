@@ -215,6 +215,29 @@
 		color: $primary;
 	}
 
+	.tabs {
+		li.is-active a {
+			color: $primary;
+			border-color: $primary !important;
+
+		}
+
+		a:hover {
+			color: #FFF !important;
+			background-color: $primary !important;
+		}
+
+		ul {
+			border-bottom-color: $primary;
+		}
+	}
+	.b-tabs .tab-content {
+		background-color: #fff;
+		border: 1px solid $primary;
+		border-top: none;
+	}
+
+
 	.bb-chart-arc path,
 	.bb path, .bb line {
 		stroke: $primary !important;
@@ -438,4 +461,24 @@ a.dropdown-item, .dropdown .dropdown-menu .has-link a, button.dropdown-item {
 
 .markdown-body > h1{
 	margin-top: 0px !important;
+}
+
+
+.li-dep {
+    padding: 1px 10px;
+
+	a {
+		color: #243746;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+
+.b-tabs .tab-content {
+	background-color: white;
+	border: 1px solid #ebebeb;
+	border-top: none;
 }

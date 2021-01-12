@@ -8,6 +8,7 @@
 			:can-cancel=canCancel
 			open
 			class="sidebar-menu"
+			:key=this.$route.params.name
 		>
 		<div class="p-1">
 			<div class="block img-logo">
@@ -52,24 +53,27 @@
 					label: 'Dashboard',
 					icon: 'chart-pie'
 				},{
-					to: '/package/'+this.$route.params.name+'/info',
+					to: '/package/'+ this.$route.params.name +'/info',
 					label: "Information",
 					icon: "text-box-outline"
 				},{
-					to: '/package/'+this.$route.params.name+'/vs',
+					to: '/package/'+ this.$route.params.name +'/vs',
 					label: "Compare",
 					icon: "file-compare"
 				},{
-					to: '/package/'+this.$route.params.name+'/downloads',
+					to: '/package/'+ this.$route.params.name +'/downloads',
 					label: "Downloads",
 					icon: "chart-areaspline"
-				},{
-					to: '/package/'+this.$route.params.name+'/dependence',
+				}
+
+					/*
+				,{
+					to: '/package/'+ this.$route.params.name +'/dependence',
 					label: "Dependence",
 					icon: "package-variant"
 				}
 
-				/*,{
+				,{
 					to: '/',
 					label: "Search",
 					icon: "magnify"

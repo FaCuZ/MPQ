@@ -11,16 +11,41 @@
 		<!-- <b-tabs type="is-toggle" position="is-centered" class="block"> -->
 		<!-- <b-tabs type="is-boxed" position="is-centered" class="block"> -->
 		<b-tabs type="is-boxed">
-			<b-tab-item label="Readme" icon="text-box">
+			<b-tab-item label="Readme" icon="text-box-outline">
 				<div class="markdown-body" v-html=metadata.readme></div>
 			</b-tab-item>
-			<b-tab-item label="Changelog" icon="book-clock">
+			<b-tab-item label="Changelog" icon="book-clock-outline">
 				list of change
 			</b-tab-item>
-			<b-tab-item label="Stats" icon="folder-information">
-				raw stats
+			<b-tab-item label="Dependencies" icon="package-variant">
+
+				<h1 class="title">
+					Dependencies <b-tag type="is-primary">{{ metadata.dependencies.length }}</b-tag>
+				</h1>
+				<ul>
+					<li v-for="(item, index) in metadata.dependencies" :key="index" class="li-dep">
+						<n-link :to="'/package/'+item.name">
+							<b-icon icon="package-variant-closed"  size="is-small" label='nombre'></b-icon>
+							<span> {{ item.name }} <em>- {{ item.version }}</em></span>
+						</n-link>
+					</li>
+				</ul>
+
+				<br/>
+
+				<h1 class="title">
+					Developer dependencies <b-tag type="is-primary">{{ metadata.devDependencies.length }}</b-tag>
+				</h1>
+				<ul>
+					<li v-for="(item, index) in metadata.devDependencies" :key="index" class="li-dep">
+						<n-link :to="'/package/'+item.name">
+							<b-icon icon="package-variant-closed" size="is-small" label='nombre'></b-icon>
+							<span> {{ item.name }} <em>- {{ item.version }}</em></span>
+						</n-link>
+					</li>
+				</ul>
 			</b-tab-item>
-			<b-tab-item label="Licence" icon="sticker-check">
+			<b-tab-item label="Licence" icon="file-check-outline">
 				licencia
 			</b-tab-item>
 		</b-tabs>
